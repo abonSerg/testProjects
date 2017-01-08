@@ -7,8 +7,8 @@
     <ProjectGuid>{8049B1DB-86EE-4560-AF93-2B07F779250B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MessageBroker</RootNamespace>
-    <AssemblyName>MessageBroker</AssemblyName>
+    <RootNamespace>OneWayMessageSender</RootNamespace>
+    <AssemblyName>OneWayMessageSender</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -49,11 +49,16 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RabbitMqService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RabbitMqService\RabbitMqService.csproj">
+      <Project>{8d41d4a9-b77e-4188-96dd-d3c89b9850e9}</Project>
+      <Name>RabbitMqService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

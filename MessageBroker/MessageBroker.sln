@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBroker", "MessageBroker\MessageBroker.csproj", "{8049B1DB-86EE-4560-AF93-2B07F779250B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneWayMessageSender", "OneWayMessageSender\OneWayMessageSender.csproj", "{8049B1DB-86EE-4560-AF93-2B07F779250B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMqService", "RabbitMqService\RabbitMqService.csproj", "{8D41D4A9-B77E-4188-96DD-D3C89B9850E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneWayMessageReceiver", "OneWayMessageReceiver\OneWayMessageReceiver.csproj", "{B3B4EA0A-6B8C-431C-9E05-4E45CAC44546}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerQueueSender", "WorkerQueueSender\WorkerQueueSender.csproj", "{009835FD-C478-4AE0-B794-EC6E8B926469}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerQueueReceiverOne", "WorkerQueueReceiverOne\WorkerQueueReceiverOne.csproj", "{F1A4A799-FE2F-471A-ACB2-057EAEE9671C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerQueueReceiverTwo", "WorkerQueueReceiverTwo\WorkerQueueReceiverTwo.csproj", "{9CA96304-4574-4D57-9B48-188EE73BE3F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,26 @@ Global
 		{8049B1DB-86EE-4560-AF93-2B07F779250B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8049B1DB-86EE-4560-AF93-2B07F779250B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8049B1DB-86EE-4560-AF93-2B07F779250B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D41D4A9-B77E-4188-96DD-D3C89B9850E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D41D4A9-B77E-4188-96DD-D3C89B9850E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D41D4A9-B77E-4188-96DD-D3C89B9850E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D41D4A9-B77E-4188-96DD-D3C89B9850E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3B4EA0A-6B8C-431C-9E05-4E45CAC44546}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3B4EA0A-6B8C-431C-9E05-4E45CAC44546}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3B4EA0A-6B8C-431C-9E05-4E45CAC44546}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3B4EA0A-6B8C-431C-9E05-4E45CAC44546}.Release|Any CPU.Build.0 = Release|Any CPU
+		{009835FD-C478-4AE0-B794-EC6E8B926469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{009835FD-C478-4AE0-B794-EC6E8B926469}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{009835FD-C478-4AE0-B794-EC6E8B926469}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{009835FD-C478-4AE0-B794-EC6E8B926469}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1A4A799-FE2F-471A-ACB2-057EAEE9671C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1A4A799-FE2F-471A-ACB2-057EAEE9671C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1A4A799-FE2F-471A-ACB2-057EAEE9671C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1A4A799-FE2F-471A-ACB2-057EAEE9671C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CA96304-4574-4D57-9B48-188EE73BE3F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CA96304-4574-4D57-9B48-188EE73BE3F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CA96304-4574-4D57-9B48-188EE73BE3F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CA96304-4574-4D57-9B48-188EE73BE3F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
