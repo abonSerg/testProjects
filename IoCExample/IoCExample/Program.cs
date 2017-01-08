@@ -6,52 +6,12 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
+using Autofac.Core;
+using IoCExample.Core;
 
 namespace IoCExample
 {
-    public interface IPrinter
-    {
-        void Print();
-    }
-
-    public class LocalPrinter : IPrinter
-    {
-        public void Print()
-        {
-            Console.WriteLine("Printing on the LOCAL prtinter...");
-        }
-    }
-
-    public class PublicPrinter : IPrinter
-    {
-        public void Print()
-        {
-            Console.WriteLine("Printing on the PUBLIC prtinter...");
-        }
-    }
-
-    public class PrinterProvider : IPrinterProvider
-    {
-        private readonly IPrinter printer;
-
-        public PrinterProvider(IPrinter printer)
-        {
-            this.printer = printer;
-        }
-
-        public void Print()
-        {
-            printer.Print();
-        }
-    }
-
-    public interface IPrinterProvider
-    {
-        void Print();
-    }
-
-
-    class Program
+   class Program
     {
         public static IContainer Container { get; set; }
 
@@ -63,6 +23,13 @@ namespace IoCExample
 
             printerProvider.Print();
             Console.Read();
+
+
+
+            var publicPrinterProvider = Container.Resolve<PublicPrinterProvider>();
+
+            publicPrinterProvider.Print();
+            Console.ReadKey();
         }
 
         private static void ConfigContainer()
@@ -73,6 +40,7 @@ namespace IoCExample
 
             builder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies());
 
+            //Injection depends on predefined parameters
             builder.Register<IPrinter>(x =>
             {
                 if (isLocalMachine)
@@ -83,7 +51,15 @@ namespace IoCExample
                 return x.Resolve<PublicPrinter>();
             });
 
-            builder.Register<IPrinterProvider>(x => x.Resolve<PrinterProvider>());
+
+            builder.Register<IPrinterProvider>(x => x.Resolve<CustomPrinterProvider>());
+
+            builder.RegisterType<LocalPrinter>().As<IPrinter>();
+            builder.RegisterType<PublicPrinter>().Named<IPrinter>("publicPrinter");
+
+            //Injection depends on what type it was injected into - ...WhenInjectedInto
+            builder.RegisterType<PublicPrinterProvider>()
+                .WithParameter(ResolvedParameter.ForNamed<IPrinter>("publicPrinter"));
 
             Container = builder.Build();
         }
