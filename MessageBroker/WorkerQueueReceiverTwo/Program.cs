@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RabbitMqService;
+﻿using RabbitMqService;
 using RabbitMQ.Client;
 
 namespace WorkerQueueReceiverTwo
@@ -12,9 +7,10 @@ namespace WorkerQueueReceiverTwo
     {
         static void Main(string[] args)
         {
-            AmqpMessagingService messagingService = new AmqpMessagingService();
-            IConnection connection = messagingService.GetRabbitMqConnection();
-            IModel model = connection.CreateModel();
+            var messagingService = new AmqpMessagingService();
+            var connection = messagingService.GetRabbitMqConnection();
+            var model = connection.CreateModel();
+                                                
             messagingService.ReceiveWorkerQueueMessages(model);
         }
     }

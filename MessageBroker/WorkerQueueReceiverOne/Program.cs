@@ -13,8 +13,9 @@ namespace WorkerQueueReceiverOne
         static void Main(string[] args)
         {
             var messagingService = new AmqpMessagingService();
-            IConnection connection = messagingService.GetRabbitMqConnection();
-            IModel model = connection.CreateModel();
+            var connection = messagingService.GetRabbitMqConnection();
+            var model = connection.CreateModel();
+
             messagingService.ReceiveWorkerQueueMessages(model);
         }
     }

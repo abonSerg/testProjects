@@ -12,9 +12,10 @@ namespace WorkerQueueSender
     {
         static void Main(string[] args)
         {
-            AmqpMessagingService messagingService = new AmqpMessagingService();
-            IConnection connection = messagingService.GetRabbitMqConnection();
-            IModel model = connection.CreateModel();
+            var messagingService = new AmqpMessagingService();
+            var connection = messagingService.GetRabbitMqConnection();
+            var model = connection.CreateModel();
+
             //messagingService.SetUpQueueForWorkerQueueDemo(model);
 
             RunWorkerQueueMessageDemo(model, messagingService);
@@ -25,8 +26,9 @@ namespace WorkerQueueSender
             Console.WriteLine("Enter your message and press Enter. Quit with 'q'.");
             while (true)
             {
-                string message = Console.ReadLine();
+                var message = Console.ReadLine();
                 if (message.ToLower() == "q") break;
+
                 messagingService.SendMessageToWorkerQueue(message, model);
             }
         }

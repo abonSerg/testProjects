@@ -8,11 +8,11 @@ namespace OneWayMessageSender
     {
         static void Main(string[] args)
         {
-            AmqpMessagingService messagingService = new AmqpMessagingService();
-            IConnection connection = messagingService.GetRabbitMqConnection();
-            IModel model = connection.CreateModel();
+            var messagingService = new AmqpMessagingService();
+            var connection = messagingService.GetRabbitMqConnection();
+            var model = connection.CreateModel();
 
-            // messagingService.SetUpQueueForOneWayMessageDemo(model);
+            //messagingService.SetUpQueueForOneWayMessageDemo(model);
 
             RunOneWayMessageDemo(model, messagingService);
 
@@ -24,7 +24,7 @@ namespace OneWayMessageSender
             Console.WriteLine("Enter your message and press Enter. Quit with 'q'.");
             while (true)
             {
-                string message = Console.ReadLine();
+                var message = Console.ReadLine();
                 if (message.ToLower() == "q") break;
 
                 messagingService.SendOneWayMessage(message, model);

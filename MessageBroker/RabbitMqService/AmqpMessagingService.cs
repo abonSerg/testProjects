@@ -20,10 +20,12 @@ namespace RabbitMqService
 
         public IConnection GetRabbitMqConnection()
         {
-            ConnectionFactory connectionFactory = new ConnectionFactory();
-            connectionFactory.HostName = _hostName;
-            connectionFactory.UserName = _userName;
-            connectionFactory.Password = _password;
+            var connectionFactory = new ConnectionFactory
+            {
+                HostName = _hostName,
+                UserName = _userName,
+                Password = _password
+            };
 
             return connectionFactory.CreateConnection();
         }
@@ -33,53 +35,51 @@ namespace RabbitMqService
             model.QueueDeclare(_oneWayMessageQueueName, _durable, false, false, null);
         }
 
-        public void SetUpQueueForWorkerQueueDemo(IModel model)
-        {
-            model.QueueDeclare(_workerQueueDemoQueueName, _durable, false, false, null);
-        }
 
         public void SendOneWayMessage(string message, IModel model)
         {
-            IBasicProperties basicProperties = model.CreateBasicProperties();
+            var basicProperties = model.CreateBasicProperties();
             basicProperties.Persistent = _durable;
+
             byte[] messageBytes = Encoding.UTF8.GetBytes(message);
             model.BasicPublish(_exchangeName, _oneWayMessageQueueName, basicProperties, messageBytes);
         }
 
         public void ReceiveOneWayMessages(IModel model)
         {
-            model.BasicQos(0, 1, false); //basic quality of service
-            var consumer = new QueueingBasicConsumer(model);
-            //   var consumer = new EventingBasicConsumer(model);
-            model.BasicConsume(_oneWayMessageQueueName, false, consumer);
-            while (true)
-            {
-                BasicDeliverEventArgs deliveryArguments = consumer.Queue.Dequeue();
-                string message = Encoding.UTF8.GetString(deliveryArguments.Body);
-                Console.WriteLine("Message received: {0}", message);
-                model.BasicAck(deliveryArguments.DeliveryTag, false);
-            }
-        }
-        public void SendMessageToWorkerQueue(string message, IModel model)
-        {
-            IBasicProperties basicProperties = model.CreateBasicProperties();
-            basicProperties.SetPersistent(_durable);
-            byte[] messageBytes = Encoding.UTF8.GetBytes(message);
-            model.BasicPublish(_exchangeName, _workerQueueDemoQueueName, basicProperties, messageBytes);
+            ReceiveQueueMessages(model, _workerQueueDemoQueueName);
         }
 
         public void ReceiveWorkerQueueMessages(IModel model)
         {
-            model.BasicQos(0, 1, false); //basic quality of service
-            QueueingBasicConsumer consumer = new QueueingBasicConsumer(model);
-            model.BasicConsume(_workerQueueDemoQueueName, false, consumer);
+            ReceiveQueueMessages(model, _oneWayMessageQueueName);
+        }
+
+        private void ReceiveQueueMessages(IModel model, string queueName)
+        {
+            model.BasicQos(0, 1, false);
+            var consumer = new QueueingBasicConsumer(model);
+
+            model.BasicConsume(queueName, false, consumer);
             while (true)
             {
-                BasicDeliverEventArgs deliveryArguments = consumer.Queue.Dequeue() as BasicDeliverEventArgs;
-                String message = Encoding.UTF8.GetString(deliveryArguments.Body);
+                var deliveryArguments = consumer.Queue.Dequeue();
+                var message = Encoding.UTF8.GetString(deliveryArguments.Body);
+
                 Console.WriteLine("Message received: {0}", message);
+
                 model.BasicAck(deliveryArguments.DeliveryTag, false);
             }
+        }
+
+        public void SendMessageToWorkerQueue(string message, IModel model)
+        {
+            var basicProperties = model.CreateBasicProperties();
+            basicProperties.Persistent = _durable;
+
+            var messageBytes = Encoding.UTF8.GetBytes(message);
+
+            model.BasicPublish(_exchangeName, _workerQueueDemoQueueName, basicProperties, messageBytes);
         }
     }
 

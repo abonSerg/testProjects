@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerQueueReceiverOne", "W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerQueueReceiverTwo", "WorkerQueueReceiverTwo\WorkerQueueReceiverTwo.csproj", "{9CA96304-4574-4D57-9B48-188EE73BE3F3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OneWay", "OneWay", "{6C66AFC3-D88D-4F15-A4A6-84F5BD749C64}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WorkerQueue", "WorkerQueue", "{FCE8C19B-D975-4FCE-A0A8-00D44FB270F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +52,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8049B1DB-86EE-4560-AF93-2B07F779250B} = {6C66AFC3-D88D-4F15-A4A6-84F5BD749C64}
+		{B3B4EA0A-6B8C-431C-9E05-4E45CAC44546} = {6C66AFC3-D88D-4F15-A4A6-84F5BD749C64}
+		{009835FD-C478-4AE0-B794-EC6E8B926469} = {FCE8C19B-D975-4FCE-A0A8-00D44FB270F1}
+		{F1A4A799-FE2F-471A-ACB2-057EAEE9671C} = {FCE8C19B-D975-4FCE-A0A8-00D44FB270F1}
+		{9CA96304-4574-4D57-9B48-188EE73BE3F3} = {FCE8C19B-D975-4FCE-A0A8-00D44FB270F1}
 	EndGlobalSection
 EndGlobal

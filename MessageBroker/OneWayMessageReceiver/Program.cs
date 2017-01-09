@@ -12,9 +12,10 @@ namespace OneWayMessageReceiver
     {
         static void Main(string[] args)
         {
-            AmqpMessagingService messagingService = new AmqpMessagingService();
-            IConnection connection = messagingService.GetRabbitMqConnection();
-            IModel model = connection.CreateModel();
+            var messagingService = new AmqpMessagingService();
+            var connection = messagingService.GetRabbitMqConnection();
+
+            var model = connection.CreateModel();
             messagingService.ReceiveOneWayMessages(model);
         }
     }
