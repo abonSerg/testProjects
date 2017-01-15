@@ -16,7 +16,7 @@ namespace WorkerQueueSender
             var connection = messagingService.GetRabbitMqConnection();
             var model = connection.CreateModel();
 
-            //messagingService.SetUpQueueForWorkerQueueDemo(model);
+            messagingService.SetUpQueueForWorkerQueueDemo(model);
 
             RunWorkerQueueMessageDemo(model, messagingService);
         }

@@ -35,6 +35,11 @@ namespace RabbitMqService
             model.QueueDeclare(_oneWayMessageQueueName, _durable, false, false, null);
         }
 
+        public void SetUpQueueForWorkerQueueDemo(IModel model)
+        {
+            model.QueueDeclare(_workerQueueDemoQueueName, _durable, false, false, null);
+        }
+
 
         public void SendOneWayMessage(string message, IModel model)
         {
@@ -50,9 +55,11 @@ namespace RabbitMqService
             ReceiveQueueMessages(model, _workerQueueDemoQueueName);
         }
 
+
+
         public void ReceiveWorkerQueueMessages(IModel model)
         {
-            ReceiveQueueMessages(model, _oneWayMessageQueueName);
+            ReceiveQueueMessages(model, _workerQueueDemoQueueName);
         }
 
         private void ReceiveQueueMessages(IModel model, string queueName)
